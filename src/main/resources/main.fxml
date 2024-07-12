@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.QMApp.controller.MainController">
+    <children>
+        <TextField fx:id="taskDescriptionField" layoutX="14.0" layoutY="14.0" promptText="Task Description"/>
+        <TextField fx:id="taskDateField" layoutX="14.0" layoutY="44.0" promptText="Task Date"/>
+        <TextField fx:id="taskRiskLevelField" layoutX="14.0" layoutY="74.0" promptText="Task Risk Level"/>
+        <TextField fx:id="taskReportedByField" layoutX="14.0" layoutY="104.0" promptText="Task Reported By"/>
+        <Button layoutX="14.0" layoutY="134.0" text="Add Task" onAction="#handleAddTask"/>
+        <Button layoutX="94.0" layoutY="134.0" text="Delete Task" onAction="#handleDeleteTask"/>
+        <TableView fx:id="taskTable" layoutX="14.0" layoutY="164.0" prefHeight="200.0" prefWidth="300.0"/>
+
+        <TextField fx:id="incidentDescriptionField" layoutX="334.0" layoutY="14.0" promptText="Incident Description"/>
+        <TextField fx:id="incidentDateField" layoutX="334.0" layoutY="44.0" promptText="Incident Date"/>
+        <TextField fx:id="incidentRiskLevelField" layoutX="334.0" layoutY="74.0" promptText="Incident Risk Level"/>
+        <TextField fx:id="incidentReportedByField" layoutX="334.0" layoutY="104.0" promptText="Incident Reported By"/>
+        <Button layoutX="334.0" layoutY="134.0" text="Add Incident" onAction="#handleAddIncident"/>
+        <Button layoutX="414.0" layoutY="134.0" text="Delete Incident" onAction="#handleDeleteIncident"/>
+        <TableView fx:id="incidentTable" layoutX="334.0" layoutY="164.0" prefHeight="200.0" prefWidth="300.0"/>
+    </children>
+</AnchorPane>
+
+

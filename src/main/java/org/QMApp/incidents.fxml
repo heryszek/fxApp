@@ -1,0 +1,3 @@
+<GridPane fx:controller="com.example.IncidentController" xmlns:fx="http://javafx.com/fxml">
+    <!-- Add UI components -->
+</GridPane>

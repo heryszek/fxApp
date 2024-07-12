@@ -1,0 +1,3 @@
+<GridPane fx:controller="com.example.TaskController" xmlns:fx="http://javafx.com/fxml">
+    <!-- Add UI components -->
+</GridPane>
