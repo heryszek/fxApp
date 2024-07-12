@@ -1,101 +1,81 @@
 package org.QMApp.controller;
 
-
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import org.QMApp.model.Task;
+import javafx.scene.control.cell.PropertyValueFactory;
 import org.QMApp.model.Incident;
-import org.QMApp.service.TaskService;
-import org.QMApp.service.IncidentService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.QMApp.model.Task;
 import org.springframework.stereotype.Controller;
 
 import javax.annotation.PostConstruct;
-import java.time.LocalDate;
 
 @Controller
 public class MainController {
 
-    // Task fields
-    @FXML private TextField taskDescriptionField;
-    @FXML private TextField taskDateField;
-    @FXML private TextField taskRiskLevelField;
-    @FXML private TextField taskReportedByField;
-    @FXML private TableView<Task> taskTable;
+    @FXML
+    private TableView<Task> taskTable;
 
-    // Incident fields
-    @FXML private TextField incidentDescriptionField;
-    @FXML private TextField incidentDateField;
-    @FXML private TextField incidentRiskLevelField;
-    @FXML private TextField incidentReportedByField;
-    @FXML private TableView<Incident> incidentTable;
+    @FXML
+    private TableColumn<Task, String> taskDescriptionColumn;
 
-    @Autowired private TaskService taskService;
-    @Autowired private IncidentService incidentService;
+    @FXML
+    private TableColumn<Task, String> taskRiskLevelColumn;
+
+    @FXML
+    private TableView<Incident> incidentTable;
+
+    @FXML
+    private TableColumn<Incident, String> incidentDescriptionColumn;
+
+    @FXML
+    private TableColumn<Incident, String> incidentRiskLevelColumn;
+
+    private final ObservableList<Task> taskData = FXCollections.observableArrayList();
+    private final ObservableList<Incident> incidentData = FXCollections.observableArrayList();
 
     @PostConstruct
     public void init() {
-        taskTable.setItems(FXCollections.observableArrayList(taskService.getAllTasks()));
-        incidentTable.setItems(FXCollections.observableArrayList(incidentService.getAllIncidents()));
+        taskDescriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+        taskRiskLevelColumn.setCellValueFactory(new PropertyValueFactory<>("riskLevel"));
+        taskTable.setItems(taskData);
+
+        incidentDescriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+        incidentRiskLevelColumn.setCellValueFactory(new PropertyValueFactory<>("riskLevel"));
+        incidentTable.setItems(incidentData);
     }
 
     @FXML
     private void handleAddTask() {
-        Task task = new Task();
-        task.setDescription(taskDescriptionField.getText());
-        task.setDate(LocalDate.parse(taskDateField.getText()));
-        task.setRiskLevel(taskRiskLevelField.getText());
-        task.setReportedBy(taskReportedByField.getText());
-        taskService.saveTask(task);
-        taskTable.getItems().add(task);
-        clearTaskFields();
+        Task newTask = new Task();
+        newTask.setDescription("New Task");
+        newTask.setRiskLevel("Low");
+        taskData.add(newTask);
     }
 
     @FXML
     private void handleDeleteTask() {
-        Task selectedTask = taskTable.getSelectionModel().getSelectedItem();
-        if (selectedTask != null) {
-            taskService.deleteTask(selectedTask.getId());
-            taskTable.getItems().remove(selectedTask);
+        int selectedIndex = taskTable.getSelectionModel().getSelectedIndex();
+        if (selectedIndex >= 0) {
+            taskData.remove(selectedIndex);
         }
     }
 
     @FXML
     private void handleAddIncident() {
-        Incident incident = new Incident();
-        incident.setDescription(incidentDescriptionField.getText());
-        incident.setDate(LocalDate.parse(incidentDateField.getText()));
-        incident.setRiskLevel(incidentRiskLevelField.getText());
-        incident.setReportedBy(incidentReportedByField.getText());
-        incidentService.saveIncident(incident);
-        incidentTable.getItems().add(incident);
-        clearIncidentFields();
+        Incident newIncident = new Incident();
+        newIncident.setDescription("New Incident");
+        newIncident.setRiskLevel("High");
+        incidentData.add(newIncident);
     }
 
     @FXML
     private void handleDeleteIncident() {
-        Incident selectedIncident = incidentTable.getSelectionModel().getSelectedItem();
-        if (selectedIncident != null) {
-            incidentService.deleteIncident(selectedIncident.getId());
-            incidentTable.getItems().remove(selectedIncident);
+        int selectedIndex = incidentTable.getSelectionModel().getSelectedIndex();
+        if (selectedIndex >= 0) {
+            incidentData.remove(selectedIndex);
         }
     }
-
-    private void clearTaskFields() {
-        taskDescriptionField.clear();
-        taskDateField.clear();
-        taskRiskLevelField.clear();
-        taskReportedByField.clear();
-    }
-
-    private void clearIncidentFields() {
-        incidentDescriptionField.clear();
-        incidentDateField.clear();
-        incidentRiskLevelField.clear();
-        incidentReportedByField.clear();
-    }
 }
-
-
