@@ -1,6 +1,7 @@
 package org.QMApp.service;
 
 import org.QMApp.model.Incident;
+import org.QMApp.model.Task;
 import org.QMApp.repository.IncidentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class IncidentService {
         return incidentRepository.save(incident);
     }
 
-    public void deleteIncident(Long id) {
-        incidentRepository.deleteById(id);
+    public void deleteIncident(Incident incident) {
+        incidentRepository.delete(incident);
     }
 }

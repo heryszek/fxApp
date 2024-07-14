@@ -2,8 +2,11 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.QMApp.controller.MainController">
@@ -14,20 +17,41 @@
                 <TableColumn fx:id="taskRiskLevelColumn" text="Risk Level" />
             </columns>
         </TableView>
-        <Button text="Add Task" onAction="#handleAddTask" />
-        <Button text="Delete Task" onAction="#handleDeleteTask" />
+
+        <HBox spacing="10">
+            <children>
+                <Label text="Description:" />
+                <TextField fx:id="taskDescriptionField" />
+                <Label text="Risk Level:" />
+                <TextField fx:id="taskRiskLevelField" />
+                <Button text="Add Task" onAction="#handleAddTask" />
+                <Button text="Delete Task" onAction="#handleDeleteTask" />
+            </children>
+        </HBox>
+
         <TableView fx:id="incidentTable">
             <columns>
                 <TableColumn fx:id="incidentDescriptionColumn" text="Description" />
                 <TableColumn fx:id="incidentRiskLevelColumn" text="Risk Level" />
             </columns>
         </TableView>
-        <Button text="Add Incident" onAction="#handleAddIncident" />
-        <Button text="Delete Incident" onAction="#handleDeleteIncident" />
+
+        <HBox spacing="10">
+            <children>
+                <Label text="Description:" />
+                <TextField fx:id="incidentDescriptionField" />
+                <Label text="Risk Level:" />
+                <TextField fx:id="incidentRiskLevelField" />
+                <Button text="Add Incident" onAction="#handleAddIncident" />
+                <Button text="Delete Incident" onAction="#handleDeleteIncident" />
+            </children>
+        </HBox>
     </children>
     <VBox.margin>
         <Insets top="10" right="10" bottom="10" left="10" />
     </VBox.margin>
 </VBox>
+
+
 
 
